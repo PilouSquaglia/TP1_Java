@@ -1,7 +1,7 @@
 package EX2;
 import java.time.LocalDate;
 
-public class Citerne {
+public class Citerne implements EstComparable {
 
     private static int nbCiterne=0;
     private String id="";
@@ -54,6 +54,14 @@ public class Citerne {
             System.err.println("Erreur dans la saisie de l'argument, le liquide est soit de l'eau, du vin ou de l'huile");
         }
 
+    }
+
+    public double getVolume() {
+        return volume;
+    }
+
+    public int getCapacite() {
+        return capacite;
     }
 
     public boolean plusAncienne(Citerne c2){
@@ -114,8 +122,8 @@ public class Citerne {
         }
         catch(IllegalArgumentException e){
             System.err.println("Erreur dans la saisie de l'argument, le volume occupé demandé est inférieur à 0 il manque "+ Math.abs(quantite_final) +", ou bien la cuve n'a pas encore de type de liquide assigné");
-            this.volume=0;
         }
+        this.volume=0;
     }
 
     public void enleverLiquide(int suppquantite){
@@ -131,8 +139,8 @@ public class Citerne {
         }
         catch(IllegalArgumentException e){
             System.err.println("Erreur dans la saisie de l'argument, le volume occupé demandé est inférieur à 0 il manque "+ Math.abs(quantite_final) +", ou bien la cuve n'a pas encore de type de liquide assigné");
-            this.volume=0;
         }
+        this.volume=0;
     }
 
     @Override
@@ -142,6 +150,25 @@ public class Citerne {
         && ((Citerne)obj).dateMiseService.equals(this.dateMiseService)
         && ((Citerne)obj).liquide == this.liquide
         && ((Citerne)obj).volume == this.volume;
+    }
+
+    @Override
+    public int compareA(Object o) {
+        if(o != null && o instanceof Citerne){
+            if(this.volume<((Citerne)o).volume){
+                return -1;
+            }
+            else if(this.volume==((Citerne)o).volume){
+                if(this.capacite<((Citerne)o).capacite)
+                    return -1;
+                if(this.capacite==((Citerne)o).capacite)
+                    return 0;
+            }
+            else{
+                return 1;
+            }
+        }
+        return -2;
     }
 
 }

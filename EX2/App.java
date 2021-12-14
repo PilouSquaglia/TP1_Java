@@ -23,6 +23,15 @@ public class App {
         System.out.println(c1.equals(c2));
         System.out.println(c1.equals(c3));
 
+        System.out.println(c1.getVolume());
+        System.out.println(c3.getVolume());
+        System.out.println(c1.compareA(c3));
+        System.out.println(c1.compareA(c2));
+        System.out.println(c3.compareA(c1));
+
+        c3.enleverLiquide(10);
+        System.out.println(c3);
+
         // citernes.add(new Citerne(13, 9.5, Eau, dateMiseService1));
         // citernes.add(new Citerne(8, 6.2, Vin, dateMiseService2));
         // citernes.add(new Citerne(15, 10, Huile, dateMiseService3));
